@@ -18,6 +18,9 @@
 ---
 #Faas
 ## Основы FaaS
+![Uploading Pasted image 20251003092646.png…]()
+
+![Uploading Pasted image 20251003093319.png…]()
 
 <img width="780" height="406" alt="Pasted image 20251003100438" src="https://github.com/user-attachments/assets/1b01cd55-fa2b-44f7-82be-7b4567001b30" />
 
@@ -129,7 +132,8 @@
 
 ## Smart Support
 #smartSupport 
-![[Pasted image 20251003093342.png]]
+<img width="882" height="431" alt="Pasted image 20251003093342" src="https://github.com/user-attachments/assets/b7b65c69-266d-4e47-93c9-a966165730cc" />
+
 
 ---
 
