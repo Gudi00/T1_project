@@ -12,7 +12,7 @@ def load_models():
     """
     try:
         # Saiga в 4-bit quantization
-        model_name = "IlyaGusev/saiga2_7b_lora"  # Или saiga3 если доступна
+        model_name = "IlyaGusev/saiga_llama3_8b"  # Или saiga3 если доступна
         quantization_config = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_compute_dtype=torch.float16,

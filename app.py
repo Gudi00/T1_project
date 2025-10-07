@@ -18,17 +18,22 @@ from langchain.memory import ConversationSummaryMemory
 
 app = Flask(__name__)
 app.config.from_mapping(
-    SECRET_KEY=os.getenv('SECRET_KEY'),
-    REDIS_URL=os.getenv('REDIS_URL')
+    SECRET_KEY=os.getenv('SECRET_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30'),
+    REDIS_URL=os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 )
 jwt = JWTManager(app)
 socketio = SocketIO(app)
-limiter = Limiter(get_remote_address, app=app, default_limits=["10 per minute"])
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=["10 per minute"],
+    storage_uri=app.config['REDIS_URL']  # Использует Redis для persistent rate-limit
+)
 redis_client = FlaskRedis(app)
 
 # Telegram
-bot = telebot.TeleBot(os.getenv('BOT_TOKEN'))
-ADMIN_CHAT_ID = os.getenv('ADMIN_CHAT_ID')
+bot = telebot.TeleBot(os.getenv('BOT_TOKEN', '6988960612:AAHzHP4MU3oLDcygDMbYjkCvXIZQGRtHyLw'))
+ADMIN_CHAT_ID = os.getenv('ADMIN_CHAT_ID', "773103592")
 
 # Logging
 structlog.configure(processors=[structlog.processors.JSONRenderer()])

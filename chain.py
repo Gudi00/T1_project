@@ -1,7 +1,8 @@
 from langchain.chains import ConversationalRetrievalChain
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationSummaryMemory, ConversationBufferMemory
-from langchain.llms.huggingface_pipeline import HuggingFacePipeline
+from transformers import pipeline  # для создания пайплайна генерации текста
+from langchain_community.llms import HuggingFacePipeline
 import torch
 import structlog
 

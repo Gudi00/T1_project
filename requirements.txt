@@ -18,3 +18,4 @@ pyTelegramBotAPI==4.23.0
 structlog==24.4.0
 pytest==8.3.3
 redis==5.1.1
+langchain-huggingface==0.0.3

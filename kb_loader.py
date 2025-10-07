@@ -1,9 +1,11 @@
 import os
 from langchain_community.document_loaders import CSVLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings  # Updated import
+from langchain_huggingface import HuggingFaceEmbeddings  # Новый импорт (установите пакет)
 from langchain_community.vectorstores import Chroma
+import chromadb.config  # Для settings
 import structlog
+import json
 
 logger = structlog.get_logger()
 
@@ -23,15 +25,24 @@ def build_kb(csv_path='kb.csv', json_path='dynamic.json', persist_dir='./chroma_
         splits = text_splitter.split_documents(documents)
         logger.info(f"Создано {len(splits)} чанков.")
 
-        # Эмбеддинги (обновлённая многоязычная модель для RU)
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+        # Эмбеддинги (новый класс, без deprecation)
+        embeddings = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        )
 
-        # Сохранение в Chroma
-        vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings, persist_directory=persist_dir)
+        # Settings для отключения телеметрии (фикс bug)
+        client_settings = chromadb.config.Settings(anonymized_telemetry=False)
+
+        # Сохранение в Chroma с settings
+        vectorstore = Chroma.from_documents(
+            documents=splits,
+            embedding=embeddings,
+            persist_directory=persist_dir,
+            client_settings=client_settings  # Отключает telemetry
+        )
         logger.info("KB сохранена в Chroma.")
 
-        # Загрузка динамического JSON (placeholder, реализуйте парсинг по нужде)
-        import json
+        # Загрузка динамического JSON
         with open(json_path, 'r', encoding='utf-8') as f:
             dynamic_data = json.load(f)
         logger.info("Динамический JSON загружен.")
