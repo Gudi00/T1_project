@@ -1,0 +1,28 @@
+{
+    "employeeDto": null,
+    "studentGroupDto": {
+      "name": "053503",
+      "facultyId": 20026,
+      "facultyAbbrev": "ФКСиС",
+      "specialityDepartmentEducationFormId": 20021,
+      "specialityName": "Информатика и технологии программирования",
+      "specialityAbbrev": "ИиТП",
+      "course": 4,
+      "id": 23316,
+      "calendarId": "nefjuco5s419csfgiud3je9lfo@group.calendar.google.com",
+      "educationDegree": 1
+    },
+    "schedules": {
+      "Понедельник": 1,
+      "Вторник": 2,
+      "Среда": 3,
+      "Четверг": 4,
+      "Пятница": 5,
+      "Суббота": 6
+    },
+    "exams": 7,
+    "startDate": "09.02.2022",
+    "endDate": "07.06.2022",
+    "startExamsDate": "14.06.2022",
+    "endExamsDate": "02.07.2022"
+}
