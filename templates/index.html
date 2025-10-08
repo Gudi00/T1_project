@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Support Chat</title>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="chat"></div>
+    <input type="text" id="message" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button>
+
+    <script>
+        const socket = io();
+
+        socket.on('connect', () => {
+            console.log('Connected');
+        });
+
+        socket.on('response', (data) => {
+            document.getElementById('chat').innerHTML += `<p>Бот: ${data.message}</p>`;
+        });
+
+        socket.on('popup', (data) => {
+            Swal.fire({
+                title: 'Уведомление',
+                text: data.message,
+                icon: 'info'
+            });
+        });
+
+        function sendMessage() {
+            const msg = document.getElementById('message').value;
+            socket.emit('message', {message: msg});
+            document.getElementById('chat').innerHTML += `<p>Вы: ${msg}</p>`;
+            document.getElementById('message').value = '';
+        }
+
+        // Auth placeholder: fetch token from /login and set in headers if needed
+    </script>
+</body>
+</html>
