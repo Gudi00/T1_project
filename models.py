@@ -78,6 +78,3 @@ def load_models():
     except Exception as e:
         logger.error(f"Ошибка при загрузке моделей: {e}")
         raise
-
-    #Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-    #pip install intel-extension-for-pytorch[Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz] -f https://developer.intel.com/ipex-whl-stable-cpu
