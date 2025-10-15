@@ -2,6 +2,10 @@ from VectorDataBase import VectorDataBase
 from VectorSearcher import VectorSearcher
 from Qwen_model import get_qwen_response
 from ChatHistory import ChatHistory
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
 
 def init_vector_db(api_token: str):
     """
@@ -56,7 +60,7 @@ def build_messages(chat, context, user_query):
 
 
 if __name__ == "__main__":
-    API_TOKEN = "sk-eK2RKx7syQLko5qdKbvcLQ"
+    API_TOKEN = os.getenv('API_TOKEN')
 
     # Инициализация базы и чата
     vector_db = init_vector_db(API_TOKEN)
