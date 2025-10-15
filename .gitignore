@@ -8,3 +8,5 @@ vector_db/chat_history.json
 uv.lock
 pyproject.toml
 .python-version
+venv/
+*.log
