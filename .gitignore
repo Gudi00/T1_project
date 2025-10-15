@@ -11,3 +11,5 @@ pyproject.toml
 venv/
 *.log
 .DS_Store
+env
+chat_history.json
