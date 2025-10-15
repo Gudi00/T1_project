@@ -10,3 +10,4 @@ pyproject.toml
 .python-version
 venv/
 *.log
+.DS_Store
