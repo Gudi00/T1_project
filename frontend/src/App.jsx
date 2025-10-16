@@ -25,7 +25,7 @@ const answer = `
 Категория: ${response.data.category || "не указана"}
 
 Подкатегория: ${response.data.subcategory || "не указана"}
-}
+
 `.trim();
       let i = 0;
       typingInterval.current = setInterval(() => {
