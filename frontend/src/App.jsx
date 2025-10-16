@@ -19,8 +19,14 @@ export default function App() {
 
     try {
       const response = await axios.post("http://127.0.0.1:8000/ask", { query: input });
-      const answer = response.data.answer || "Ошибка получения ответа";
+const answer = `
+Ответ: ${response.data.answer || "нет данных"}
 
+Категория: ${response.data.category || "не указана"}
+
+Подкатегория: ${response.data.subcategory || "не указана"}
+}
+`.trim();
       let i = 0;
       typingInterval.current = setInterval(() => {
         setDisplayedAnswer(answer.slice(0, i + 1));
@@ -28,13 +34,13 @@ export default function App() {
         if (i >= answer.length) {
           clearInterval(typingInterval.current);
           setIsTyping(false);
-          setMessages((prev) => [...prev, { sender: "bot", text: answer }]);
+          setMessages((prev) => [...prev, { sender: "bot", text:answer}]);
         }
       }, 25);
     } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "⚠️ Ошибка подключения к серверу." },
+        { sender: "bot", text: "Ошибка подключения к серверу." },
       ]);
       setIsTyping(false);
     }
